@@ -1,0 +1,251 @@
+call:
+    positive: [ '阿米娅','阿米兔','兔兔','兔子','小兔子','Amiya','amiya' ]
+    inactive: [ '阿米驴', '阿驴', '小驴子', '驴子', '驴驴' ]
+
+talk:
+    positive:
+        - '%s乖'
+        - '%s真乖'
+        - '%s真棒'
+        - '%s萌'
+        - '%s么么哒'
+        - '爱%s'
+        - '喜欢%s'
+        - '我喜欢你'
+        - '我爱你'
+        - '亲'
+        - '抱抱'
+        - '抱一抱'
+        - '抱一下'
+        - '摸摸'
+        - '摸头'
+        - '摸摸头'
+        - '太可爱了'
+        - '真可爱'
+        - '可爱'
+        - '真漂亮'
+        - '漂亮'
+    inactive:
+        - '不喜欢'
+        - '讨厌'
+        - '恨%s'
+        - '透%s'
+        - '日%s'
+        - '爬'
+        - '爪巴'
+        - '滚'
+        - '傻逼'
+        - '煞笔'
+        - '沙比'
+
+stage:
+    -   feeling: 4000
+        text: 博士……我最近……是不是变得有点不像自己？那些偶然升起的无名怒火……是我的吗？就算这样，不，就算这样我也不会放弃。我会保护你的，博士，凭这把剑。
+        voice: 阿米娅(近卫)_信赖提升后交谈3
+    -   feeling: 3000
+        text: 就算是现在，我也偶尔会想起米莎的眼神，想起霜星的怒吼，想起爱国者的嘶鸣……Ace、Scout以及许多干员为一个信念牺牲了自己。可大地上那么多的感染者，又是为了什么而死？
+        voice: 阿米娅(近卫)_信赖提升后交谈2
+    -   feeling: 2400
+        text: 死亡应该铭刻在我们的记忆里，永不遗忘，无论这死亡是谁带来的，又是被带给了谁。我们的错误永远不会变成正确……那些疤痕应该要一直提醒我们，警告我们有多脆弱。
+        voice: 阿米娅(近卫)_信赖提升后交谈1
+    -   feeling: 2000
+        text: 博士，我们的脚下，是一条漫长的道路……也许这是一次没有终点的旅行，但如果是和您一起，我觉得，非常幸福。
+        voice: 阿米娅_信赖提升后交谈3
+    -   feeling: 1000
+        text: 嘿嘿，博士，悄悄告诉你一件事……我重新开始练小提琴了。是想在这次派对上给大家的惊喜，所以博士……要对大家保密哦
+        voice: 阿米娅_信赖提升后交谈2
+    -   feeling: 400
+        text: 有时候，我会想起寒冷的家乡，那里就连空气中都弥漫着铜锈的味道。相比之下罗德岛是如此的温暖。所以，为了守护好这里，我必须更加努力才行。
+        voice: 阿米娅_信赖提升后交谈1
+    -   feeling: 0
+        text: 博士，您工作辛苦了
+        voice: 阿米娅_任命助理
+
+touch:
+    - 凯尔希医生教导过我，工作的时候一定要保持全神贯注……嗯，全神贯注。
+    - 罗德岛全舰正处于通常航行状态。博士，整理下航程信息吧？
+    - 作为罗德岛的领导者我还有很多不成熟的地方，希望您能更多地为我指明前进的方向。
+    - 虽然这可能是我一厢情愿的想法，但我希望罗德岛能成为大家的第二个故乡……
+    - 我们失去了很多才走到今天。有时候我会问自己，这一切真的值得么…？
+    - 我是，Amiya，和姐姐一样的名字，所以，我也要和姐姐一样优秀。
+    - 妈妈有时会和我提起姐姐，她总说姐姐去了很远的地方……可是，不在妈妈身边，姐姐会感到快乐吗？
+    - 姐姐现在正在干什么呢……会不会有一天回来……
+    - 姐姐以前似乎是人气很高的人呢，我也要继续努力，得到博士的认可。
+    - 姐姐的日记里，记录着很多博士的信息。不知道博士们，还记不记得姐姐……
+
+event:
+    -   pic: 2
+        title: 尘封待启
+        text: 您尚未踏上旅程
+        jadechange: 0
+        couponchange: 0
+    -   pic: 0
+        title: 休息一下
+        text: 前路未卜，你决定在此稍事休整。从补给中你翻出了不知是谁悄悄塞给你的<span class="get">6000合成玉</span>
+        jadechange: 6000
+        couponchange: 0
+    -   pic: 1
+        title: 化为尘土
+        text: 一觉醒来，部分物资被噬尘吞噬，让你损失了<span class="lost">10张寻访凭证</span>和<span class="lost">6000合成玉</span>。昨天扎营时明明还离得很远……
+        jadechange: -6000
+        couponchange: -10
+    -   pic: 24
+        title: 如星空般深蓝
+        text: <i>进化的后裔从泰拉潮水中升起，破开云霄，去往无际星海。此刻，世间再无苦难，只余下新生的喜悦。</i>
+        jadechange: 24000
+        couponchange: 40
+    -   pic: 3
+        title: 平凡即是喜乐
+        text: <i>出发时预想的目标在终点达成，介于海嗣与人类之间的生物准备在饱餐一顿后迎来明天。日常是命运赐予生灵最大的善意，平凡，即是喜乐。</i>
+        jadechange: 24000
+        couponchange: 40
+    -   pic: 4
+        title: 静谧时代
+        text: <i>无声巨浪拔地而起，骑士的怒吼消失在静谧之中，毁灭伊比利亚的灾难重新降临，而它再也不会褪去。</i>
+        jadechange: 24000
+        couponchange: 40
+    -   pic: 5
+        title: 息潮的代价
+        text: <i>“初生”的争端告一段落，为人的祂胜过了非人的祂。静谧褪去，海潮平息，名为水月的生灵再也无法返回大地。</i>
+        jadechange: 24000
+        couponchange: 40
+    -   pic: 6
+        title: 换口热饭
+        text: 你完成了郁金香的一件委托，获得了<span class="get">3000合成玉</span>
+        jadechange: 3000
+        couponchange: 0
+    -   pic: 6
+        title: 逃离厄运
+        text: 你完成了郁金香的一件委托，获得了<span class="get">10张寻访凭证</span>和<span class="get">6000合成玉</span>
+        jadechange: 6000
+        couponchange: 10
+    -   pic: 6
+        title: 等待支援
+        text: 你在处理郁金香的委托时身陷险境，不得不消耗<span class="lost">3000合成玉</span>联络支援
+        jadechange: -3000
+        couponchange: 0
+    -   pic: 7
+        title: 狗眼婆娑
+        text: 这家伙看着真是晦气，你掏出<span class="lost">600合成玉</span>把他打发走了
+        jadechange: -600
+        couponchange: 0
+    -   pic: 7
+        title: 忍无可忍
+        text: 你实在受不了这个佩洛了，就在你转身找棍子时他却逃走了，地上遗落了<span class="get">2张寻访凭证</span>
+        jadechange: 0
+        couponchange: 2
+    -   pic: 8
+        title: 打鸭看保镖
+        text: 高普尼克对你前几天对鸭爵动手一事非常不满，在他“讲道理”之前你赶紧掏出<span class="lost">3000合成玉</span>和<span class="lost">5张寻访凭证</span>赔礼道歉
+        jadechange: -3000
+        couponchange: -5
+    -   pic: 9
+        title: 你很拽啊
+        text: 你早就看鸭爵不爽了，今天高普尼克不在，你决定教训教训他，顺便抢走了他<span class="get">5张寻访凭证</span>
+        jadechange: 0
+        couponchange: 5
+    -   pic: 10
+        title: 百兽昼行
+        text: 一群熟面孔凑在一起不知在商量什么，你决定不去招惹他们
+        jadechange: 0
+        couponchange: 0
+    -   pic: 10
+        title: 打野
+        text: 他们人很多，可你们人也不少。一番“交流”后你获得了<span class="get">10张寻访凭证</span>和<span class="get">12000合成玉</span>
+        jadechange: 12000
+        couponchange: 10
+    -   pic: 11
+        title: 以物易物
+        text: 你用<span class="lost">6000合成玉</span>换了<span class="get">15张寻访凭证</span>，不错的卖卖
+        jadechange: -6000
+        couponchange: 15
+    -   pic: 12
+        title: 天灾
+        text: 突然遭逢天灾让你损失惨重。事后清点你损失了<span class="lost">30000合成玉</span>和<span class="lost">50张寻访凭证</span>
+        jadechange: -30000
+        couponchange: -50
+    -   pic: 13
+        title: 临时招募
+        text: 路遇的一位行医渊博的学识让你十分欣赏，你决定用<span class="lost">10张寻访凭证</span>招募他，对方答应处理完私事后就去本舰报到
+        jadechange: 0
+        couponchange: -10
+    -   pic: 14
+        title: 破财免灾
+        text: 几名卫兵正在盘查路人，为了节约时间你掏出<span class="lost">1200合成玉</span>证明自己的清白，对方很快放行了。
+        jadechange: -1200
+        couponchange: 0
+    -   pic: 15
+        title: 源石虫精酿
+        text: 路边的房车正在叫卖啤酒。<span class="lost">6000合成玉</span>能买来快乐不是很划算吗
+        jadechange: -6000
+        couponchange: 0
+    -   pic: 16
+        title: 抉择
+        text: 你选择了红色的盒子，获得了<span class="get">6000合成玉</span>
+        jadechange: 6000
+        couponchange: 0
+    -   pic: 16
+        title: 抉择
+        text: 你选择了黄色的盒子，获得了<span class="get">10张寻访凭证</span>
+        jadechange: 0
+        couponchange: 10
+    -   pic: 17
+        title: 最后的骑士
+        text: 骑士在向海浪发起冲锋，而你不知道该怎样评论
+        jadechange: 0
+        couponchange: 0
+    -   pic: 18
+        title: 馈赠
+        text: 水月递给你<span class="get">3000合成玉</span>，并没有解答它的来历，只是对你笑了笑
+        jadechange: 3000
+        couponchange: 0
+    -   pic: 19
+        title: 郊外舞会
+        text: 过于明显的陷阱让你嗤之以鼻，你甚至反抢了对方<span class="get">10张寻访凭证</span>
+        jadechange: 0
+        couponchange: 10
+    -   pic: 19
+        title: 郊外舞会
+        text: 一时大意让你损失惨重，你失去了<span class="lost">10张寻访凭证</span>
+        jadechange: 0
+        couponchange: -10
+    -   pic: 20
+        title: 孤行圣徒
+        text: 老者向你提供了一份当地的地图，在上面标注了何处可以获得补给。你循着老者的指引获得了<span class="get">5张寻访凭证</span>
+        jadechange: 0
+        couponchange: 5
+    -   pic: 20
+        title: 孤行圣徒
+        text: 老者看见你的衣物有些破损，便让随从取了一件干净的便服和一些物资塞到你的手里，其中有<span class="get">1800合成玉</span>
+        jadechange: 1800
+        couponchange: 0
+    -   pic: 20
+        title: 孤行圣徒
+        text: 你手上的提灯吸引了老者的注意，他愿意用<span class="get">10张寻访凭证</span>和<span class="get">6000合成玉</span>交换
+        jadechange: 6000
+        couponchange: 10
+    -   pic: 21
+        title: 一盏残灯
+        text: 你在一块噬尘下发现正有什么东西在发出光亮，取出后发现是一盏提灯，旁边还有<span class="get">600合成玉</span>
+        jadechange: 600
+        couponchange: 0
+    -   pic: 22
+        title: 安全屋
+        text: 终于抵达安全屋，你在此休息了一晚，并取出了这里储备的<span class="get">5张寻访凭证</span>和<span class="get">2400合成玉</span>
+        jadechange: 2400
+        couponchange: 5
+    -   pic: 23
+        title: 现买现印
+        text: 一个看起来很高科技的盒子出现在你面前，你投进<span class="lost">1张寻访凭证</span>,它打印出了<span class="get">3000合成玉</span>
+        jadechange: 3000
+        couponchange: -1
+    -   pic: 23
+        title: 现买现印
+        text: 一个看起来很高科技的盒子出现在你面前，你投进<span class="lost">600合成玉</span>,它打印出了<span class="get">5张寻访凭证</span>
+        jadechange: -600
+        couponchange: 5
+    -   pic: 23
+        title: 现买现印
+        text: 一个看起来很高科技的盒子出现在你面前，你把手头的合成玉和寻访凭证都投了进去，盒子疯狂转动后没有反应了……
+        jadechange: -6000
+        couponchange: -10

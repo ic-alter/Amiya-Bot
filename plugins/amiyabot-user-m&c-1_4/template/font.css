@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'HarmonyOS';
+    src: url('./fonts/HarmonyOS_Sans_SC.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AgeFonts001';
+    src: url('./fonts/AgeFonts001.18d238.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'HarmonyOS', serif !important
+}

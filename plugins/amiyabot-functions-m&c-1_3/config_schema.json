@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": [],
+    "properties": {
+        "MD5Stylize": {
+            "title": "是否使用插件样式生成详细功能描述",
+            "type": "boolean",
+            "default": false
+        },
+        "HighPriority": {
+            "title": "是否使用高优先级",
+            "description": "如出现功能冲突请关闭此选项",
+            "type": "boolean",
+            "default": true
+        }
+    }
+}

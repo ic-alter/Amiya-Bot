@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": [],
+    "properties": {
+        "coupon": {
+            "title": "签到基础寻访凭证奖励",
+            "description": "签到获得的寻访凭证数量",
+            "type": "integer",
+            "default": 10
+        },
+        "jadepoint": {
+            "title": "签到基础合成玉奖励",
+            "description": "签到获得的合成玉数量",
+            "type": "integer",
+            "default": 6000
+        },
+        "roguelike": {
+            "title": "签到是否启用随机事件",
+            "description": "实际奖励=基础奖励+随机事件奖励（可能为负）",
+            "type": "boolean",
+            "default": true
+        },
+        "nudge": {
+            "title": "是否响应戳一戳",
+            "description": "如与其他插件功能重复可关闭此选项",
+            "type": "boolean",
+            "default": true
+        }
+    }
+}

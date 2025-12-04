@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": [],
+    "properties": {
+        "operatorInfo": {
+            "title": "干员资料设置",
+            "type": "object",
+            "properties": {
+                "showToken": {
+                    "title": "是否展示召唤物",
+                    "type": "boolean",
+                    "default": true
+                },
+                "blockMishap": {
+                    "title": "防误触",
+                    "description": "打开防误触用户需要添加“查询”关键词或“仅发送名称”才能触发功能",
+                    "type": "boolean",
+                    "default": false
+                }
+            }
+        },
+        "operatorSkin": {
+            "title": "干员立绘设置",
+            "type": "object",
+            "properties": {
+                "showImage": {
+                    "title": "是否发送原图",
+                    "type": "boolean",
+                    "default": false
+                }
+            }
+        },
+        "searchSetting": {
+            "title": "关键词匹配设置",
+            "type": "object",
+            "properties": {
+                "similarMode": {
+                    "title": "模糊匹配模式",
+                    "description": "模糊匹配下，会匹配相似的干员名，如“赛“雷娅",
+                    "type": "boolean",
+                    "default": false
+                },
+                "lengthLimit": {
+                    "title": "句子单词数量限制",
+                    "description": "当句子的单词数量超过限制时，不触发功能",
+                    "type": "integer",
+                    "default": 10
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,131 @@
+* {
+    font-size: 16px;
+    box-sizing: border-box;
+    text-shadow: 1px 1px 2px #3AB4CE;
+}
+
+body {
+    margin: 0;
+}
+
+#template {
+    width: 1280px;
+    /* min-height: 720px; */
+    /* padding: 20px; */
+    color: #fff;
+    background-image: url(img/pc_bg.jpeg);
+    background-size: auto;
+    background-repeat: repeat-y;
+    overflow: hidden;
+}
+
+.top {
+    width: 1280px;
+    height: 470px;
+    background-image: url(img/banner.jpg);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.top > div {
+    padding-left: 20px;
+}
+
+.enabled {
+    padding: 0px 20px 20px 20px;
+}
+
+.disabled {
+    padding: 0px 20px 20px 20px;
+}
+
+.title {
+    /* background: rgb(0 0 0 / 35%); */
+    font-size: 60px;
+    font-weight: bold;
+    text-shadow: 2px 2px 3px #000;
+}
+
+.info {
+    font-size: 24px;
+    background: rgb(0 0 0 / 35%);
+    padding: 3px 0px;
+}
+
+.title2 {
+    background: linear-gradient(to right, #171717ff, #3a3a3a55);
+    border-left: 15px solid #ff9800;
+    padding: 10px;
+    font-size: 24px;
+    text-shadow: none;
+}
+
+.pluginlist {
+    display: flex;
+    flex-wrap: wrap;
+    background: rgb(255 255 255 / 10%);
+    border-radius: 0px 0px 15px 15px;
+    padding: 5px;    
+}
+
+.plugin {
+    width: 400px;
+    display: flex;
+    margin: 5px;
+    padding: 6px 10px;
+    background: rgb(0 0 0 / 35%);
+    border-radius: 10px;
+}
+
+.Logo {
+    width: 90px;
+    height: 90px;
+    /* background: rgb(255 255 255 / 10%); */
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+}
+
+
+.Index {
+    font-size: 20px;
+    color: #3AB4CE;
+    text-shadow: none;
+}
+
+.Name {
+    font-size: 20px;
+    width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;    
+}
+
+.version {
+    align-self: flex-end;
+    color: #999;
+    text-shadow: none;
+}
+
+.Description {
+    width: 290px;
+    height: 64px;
+    margin-top: 5px;
+    padding-top: 7px;
+    border-top: 2px dashed rgb(255 255 255 / 10%);
+    overflow: hidden;
+}
+
+.tag {
+    padding: 0 2px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 3px;
+    right: -2px;
+    background: #3cb300;    
+}

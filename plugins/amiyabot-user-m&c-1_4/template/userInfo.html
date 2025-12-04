@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="text/css" rel="styleSheet" href="font.css" />
+    <link type="text/css" rel="styleSheet" href="userInfo.css" />
+    <title>template</title>
+</head>
+
+<body>
+    <div id="template">
+        <!-- <div>{{ data.skin_path }}</div> -->
+        <div :style="{backgroundImage: `url('../../../${data.skin_path}')`}" v-if="Object.keys(data).length"
+            class="background">
+            <div class="left">
+                <div>
+                    <div class="text">
+                        <div>
+                            <img style="height: 20px; margin-top: 5px; margin-right: 5px" src="img/signdata.png">
+                        </div>
+                        <div class="ANW">{{ data.user_info.sign_date }}</div>
+                    </div>
+                    <div class="text">
+                        <div>累计签到：</div>
+                        <div class="AN">{{ data.user_info.sign_times }}</div>
+                    </div>
+                </div>
+                <div class="ending">
+                    <img v-if="data.ending1" src="img/ending1.png">
+                    <img v-if="data.ending2" src="img/ending2.png">
+                    <img v-if="data.ending3" src="img/ending3.png">
+                    <img v-if="data.ending4" src="img/ending4.png">
+                </div>
+                <div class="info">
+                    <div style="padding-bottom: 10px">
+                        <div class="text">
+                            <img style="padding-top: 3px" src="img/coupon.png">
+                            <div class="ANW">{{ data.user_gacha_info.coupon }}</div>
+                        </div>
+                        <div class="text" style="padding-top: 10px">
+                            <img src="img/jade_point.png">
+                            <div>
+                                <div class="ANW" style="font-size: 12px">{{ data.user_info.jade_point }}</div>
+                                <div class="ANW" style="font-size: 12px">{{ data.user_info.jade_point_max }}/30000</div>
+                                <div class="jade-point" style="width: 83px">
+                                    <div class="block_get" v-if="data.user_info.jade_point_max >= 0"
+                                        :style="{ width: Math.abs((data.user_info.jade_point_max / 30000 * 100).toFixed(0)) + '%' }">
+                                    </div>
+                                    <div class="block_lost" v-if="data.user_info.jade_point_max < 0"
+                                        :style="{ width: Math.abs((data.user_info.jade_point_max / 30000 * 100).toFixed(0)) + '%' }">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text" style="padding-bottom: 3px">
+                        <div>已抽</div>
+                        <div class="AN">&nbsp;{{ data.user_gacha_info.gacha_break_even }}&nbsp;</div>
+                        <div>次无六星干员</div>
+                    </div>
+                    <div class="operatornum" style="background-image: url(img/operatornum.png)">雇佣干员数</div>
+                    <div class="ANW" style="font-size: 40px">{{ operatorNum }}</div>
+                </div>
+            </div>
+            <div class="middle">
+                <div style="padding-top: 5px">
+                    <div class="text">
+                        <img style="padding-top: 2px" src="img/mood.png">
+                        <div class="ANW">{{ (data.user_info.user_mood / 15 * 100).toFixed(0) }}%</div>
+                    </div>
+                    <div class="text">
+                        <img style="padding-top: 2px" src="img/feeling.png">
+                        <div class="ANW">{{ (data.user_info.user_feeling / 10).toFixed(0) }}%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="avatar">
+                    <div class="avatar-image">
+                        <img :src="data.avatar" :alt="data.nickname" onerror="DefaultImage(this)">
+                    </div>
+                    <div>
+                        <div class="nickname">{{ data.nickname }}</div>
+                        <div class="ending_finish" v-if="data.ending1 && data.ending2 && data.ending3 && data.ending4">a l l f i n i s h e d</div>
+                    </div>
+                </div>
+                <div class="event" style="background-image: url(img/event_bg.png)">
+                    <img class="event_img" :src="'img/event/' + data.event_pic + '.png'">
+                    <div class="event_title">{{ data.event_title }}</div>
+                    <div class="event_text" v-html="data.event_text"></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom" style="height: 5px">
+            <table class="table" style="width: 100%" border="0">
+                <tr>
+                    <td class="six" :style="{ width:(sixrate) + '%'}"></td>
+                    <td class="five" :style="{ width:(fiverate) + '%'}"></td>
+                    <td class="four" :style="{ width:(fourrate) + '%'}"></td>
+                    <td class="three"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="./js/vue.min.js"></script>
+<script>
+    function DefaultImage(e) {
+        e.src = 'img/Avatar.png'
+    }
+    const template = new Vue({
+        el: '#template',
+        methods: {
+            init(data) {
+                const box = data.operator_box.operator.split('|').filter(n => n)
+                const rate = {}
+                const res = []
+
+                let total = 0
+                for (let item of box) {
+                    let opt = item.split(':')
+                    let r = parseInt(opt[1])
+
+                    if (!rate[r]) {
+                        rate[r] = 0
+                    }
+                    rate[r] += parseInt(opt[2])
+                    total += parseInt(opt[2])
+                }
+
+                const sixrate = (rate[6] / total * 100).toFixed(0)
+                const fiverate = (rate[5] / total * 100).toFixed(0)
+                const fourrate = (rate[4] / total * 100).toFixed(0)
+                const threerate = (rate[3] / total * 100).toFixed(0)
+
+                this.$set(this, 'data', data)
+                this.$nextTick(() => {
+                    this.total = total
+                    this.operatorNum = box.length
+                    this.sixrate = sixrate
+                    this.fiverate = fiverate
+                    this.fourrate = fourrate
+                    this.threerate = threerate
+                })
+            }
+        },
+        data() {
+            return {
+                data: {},
+                total: 0,
+                operatorNum: 0,
+                sixrate: 0,
+                fiverate: 0,
+                fourrate: 0,
+                threerate: 0
+            }
+        },
+        mounted() {
+            window.init = this.init
+        }
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,4 @@
+remote:
+    console: http://106.52.139.57:8000
+    cos: https://cos.amiyabot.com
+    plugin: https://cdn.amiyabot.com

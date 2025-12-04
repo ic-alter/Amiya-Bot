@@ -1,0 +1,8 @@
+Dockerfile
+dockersh/
+black.sh
+.git/
+.gitignore
+.gitmodules
+pluginsDev/
+pluginsServer/
