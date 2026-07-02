@@ -64,8 +64,23 @@ venv = 'venv/Lib/site-packages'
 scripts = 'venv/Scripts'
 
 if platform == 'linux':
-    venv = 'venv/lib/python3.8/site-packages'
+    # 动态检测Python版本
+    for py_version in ['python3.12', 'python3.13', 'python3.11', 'python3.10']:
+        if os.path.exists(f'venv/lib/{py_version}/site-packages'):
+            venv = f'venv/lib/{py_version}/site-packages'
+            break
+    else:
+        venv = 'venv/lib/python3.12/site-packages'  # 默认值
     scripts = 'venv/bin'
+elif platform == 'win32':
+    # Windows下也检查多种可能的结构
+    if not os.path.exists('venv/Lib/site-packages'):
+        # 检查是否有版本特定的目录
+        for py_version in ['python3.12', 'python3.13', 'python3.11', 'python3.10']:
+            version_path = f'venv/Lib/{py_version}/site-packages'
+            if os.path.exists(version_path):
+                venv = version_path
+                break
 
 folder = 'package'
 
@@ -101,7 +116,53 @@ def build(version: str, force: bool = False, upload: bool = False):
     os.makedirs(dist)
     os.makedirs(jieba_copy)
 
-    shutil.copy(f'{venv}/jieba/dict.txt', f'{jieba_copy}/dict.txt')
+    # 查找jieba的安装位置
+    jieba_dict_path = None
+
+    # 方法1: 检查标准路径
+    if os.path.exists(f'{venv}/jieba/dict.txt'):
+        jieba_dict_path = f'{venv}/jieba/dict.txt'
+
+    # 方法2: 使用Python运行时查找
+    if not jieba_dict_path:
+        try:
+            python_executable = f'{scripts}/python' if platform == 'linux' else f'{scripts}\\python.exe'
+            result = subprocess.run([python_executable, '-c', '''
+import jieba
+import os
+print(os.path.join(os.path.dirname(jieba.__file__), "dict.txt"))
+'''], capture_output=True, text=True, check=True)
+            jieba_dict_path = result.stdout.strip()
+        except:
+            pass
+
+    # 方法3: 直接搜索site-packages目录
+    if not jieba_dict_path:
+        for root, dirs, files in os.walk(venv):
+            if 'jieba' in dirs and 'dict.txt' in files:
+                jieba_path = os.path.join(root, 'jieba')
+                if os.path.exists(os.path.join(jieba_path, 'dict.txt')):
+                    jieba_dict_path = os.path.join(jieba_path, 'dict.txt')
+                    break
+
+    # 方法4: 打印调试信息
+    if not jieba_dict_path:
+        print(f"Debug: venv path = {venv}")
+        print(f"Debug: venv exists = {os.path.exists(venv)}")
+        if os.path.exists(venv):
+            print(f"Debug: Contents of {venv}:")
+            for item in os.listdir(venv):
+                print(f"  {item}")
+                if item == 'jieba' and os.path.isdir(os.path.join(venv, item)):
+                    jieba_dir = os.path.join(venv, item)
+                    print(f"    Contents of jieba dir:")
+                    for jieba_item in os.listdir(jieba_dir):
+                        print(f"      {jieba_item}")
+
+    if not jieba_dict_path or not os.path.exists(jieba_dict_path):
+        raise FileNotFoundError(f'Cannot find jieba dict.txt file in {venv}')
+
+    shutil.copy(jieba_dict_path, f'{jieba_copy}/dict.txt')
     shutil.copytree('config', f'{dist}/config', dirs_exist_ok=True)
     shutil.copytree(
         os.path.abspath(f'{venv}/amiyabot/_assets').replace(' ', '\\ '), f'{dist}/_assets', dirs_exist_ok=True
@@ -136,8 +197,10 @@ def build(version: str, force: bool = False, upload: bool = False):
         add_datas_cmd = ''.join([' --add-data=%s:%s' % df for df in data_files])
         playwright_install = [f'PLAYWRIGHT_BROWSERS_PATH=0 {os.path.abspath(scripts)}/playwright install chromium']
 
+    add_hidden_imports_cmd = ' --hidden-import=amiyabot.util --hidden-import=amiyautils'
+
     cmd += [
-        f'pyi-makespec -F -n {setup_name}{add_ico_cmd}{add_version_cmd} {local}/amiya.py {add_datas_cmd}',
+        f'pyi-makespec -F -n {setup_name}{add_ico_cmd}{add_version_cmd} {local}/amiya.py {add_datas_cmd}{add_hidden_imports_cmd}',
         *playwright_install,
         f'{os.path.abspath(scripts)}/pyinstaller {setup_name}.spec',
     ]
@@ -154,8 +217,8 @@ def build(version: str, force: bool = False, upload: bool = False):
     path = pathlib.Path(f'{folder}/{pack_name}')
 
     with zipfile.ZipFile(path, 'w') as pack:
-        for root, dirs, files in os.walk(dist):
-            for index, filename in enumerate(files):
+        for root, _, files in os.walk(dist):
+            for filename in files:
                 target = os.path.join(root, filename)
                 pack.write(target, target.replace(dist + '\\', ''))
 
