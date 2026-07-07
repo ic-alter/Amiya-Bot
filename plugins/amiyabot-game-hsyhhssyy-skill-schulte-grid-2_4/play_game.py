@@ -2,6 +2,7 @@ import re
 import datetime
 import time
 import os
+import random
 
 from core.util import read_yaml
 from core import log, Message, Chain
@@ -86,6 +87,21 @@ def format_candidate(candidate_dict, operator_name):
         word = answer["word"]  # 从字典结构中直接获取"word"
         return word
     return ""  # 如果找不到对应的operator_name，返回空字符串
+
+
+def format_hint(candidate_dict, used_hints):
+    hint_candidates = []
+    for operator_name in candidate_dict.keys():
+        for char in set(operator_name):
+            if (operator_name, char) not in used_hints:
+                hint_candidates.append((operator_name, char))
+
+    if not hint_candidates:
+        return None
+
+    operator_name, char = random.choice(hint_candidates)
+    used_hints.add((operator_name, char))
+    return f'提示：有一位未答出干员的名字中含有「{char}」字。'
 
 
 async def display_reward(data, rewards, users):
@@ -289,6 +305,7 @@ async def play_game(data: Message, game_type: str, puzzle_type: str):
         answer_interval = round(grid_x * grid_y) * 5
         users = {}
         warning_shown = False
+        used_hints = set()
 
         manager = GameManager()
         
@@ -317,6 +334,13 @@ async def play_game(data: Message, game_type: str, puzzle_type: str):
                 break
 
             write_log(f'收到回答：{message.text}')
+
+            if message.text in ['提示', '方格提示']:
+                hint_text = format_hint(answer_candidate, used_hints)
+                if hint_text is None:
+                    hint_text = '本局已经没有新的提示了。'
+                await data.send(Chain(data, at=False).text(hint_text))
+                continue
 
             if message.text in answer_candidate.keys():
                 reward_points = int(wordle_config.rewards.bingo * 1)
