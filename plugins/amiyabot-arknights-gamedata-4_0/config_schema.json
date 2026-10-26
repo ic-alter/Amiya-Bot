@@ -7,7 +7,7 @@
             "title": "是否自动更新",
             "description": "在启动时自动更新资源",
             "type": "boolean",
-            "default": false
+            "default": true
         },
         "quality": {
             "title": "立绘图片质量",
